@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@1,300&family=Yanone+Kaffeesatz:wght@300&display=swap" rel="stylesheet"> 
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+
+<style>
+    body
+    {
+        background-color: rgb(10, 131, 172);
+        font-family: 'Yanone Kaffeesatz', sans-serif;
+        font-weight: 500;
+    }
+
+</style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <a href="{% url 'home' %}" class="navbar-brand">Django Auth</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mybar"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse ml-2" id="mybar">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Donate</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">About</a></li>
+                </ul>
+                <div class="ml-auto mr-4">
+                    {% if request.user.is_authenticated %}
+                    <div class="dropdowns">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ request.user.username }}</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{% url 'dash' %}">My account</a>
+                            <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+                            <a class="dropdown-item" href="{% url 'logout' %}">Log out</a>
+                          </div>
+                        
+                    </div>
+                    {% else %}
+                    <a href="{% url 'register' %}" class="btn btn-primary">Sign Up</a>
+                    <a href="{% url 'login'%}" class="btn btn-light">Sign In</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>            
+          </div>
+        {% endfor %}
+        {% endif %}
+
+    </header>
+    <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+
+
+    <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    
+</body>
+</html>
