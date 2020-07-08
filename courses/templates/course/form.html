@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mt-2 text-light justify-content-center">
+    <h1 class="h3 text-left mt-2 p-1">{% if object %} Edit course "{{ object.title }}" {% else %} Create a new course {% endif %}</h1>
+    <div class="col-6 ">
+        <h1 class="h6 text-left mt-4 p-2">Course information</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{next}}">
+            <div class="form-group">
+                <input type="submit" value="Save course" class="btn btn-primary">
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
