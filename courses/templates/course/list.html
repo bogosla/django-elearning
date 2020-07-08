@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mt-2 text-light">
+    <h1 class="h2 text-left mt-3 p-2">My courses</h1>
+    <div class="ml-4 mt-4 p-2 col-8">
+        {% for course in object_list %}
+        <div class="bg-light p-2 ml-2 border rounded w-50">
+            <h3 class="h2 text-secondary p-2 mt-1 mb-1">{{ course.title }}</h3>
+            <div>
+                <a href="{% url 'course_edit' course.id %}" class="d-inline float-left btn btn-warning">Edit course</a>
+                <a href="{% url 'course_delete' course.id %}" class="d-inline float-right btn btn-danger">Delete course</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        {% empty %}
+        <p>You haven't any courses</p>
+        {% endfor %}
+       
+    </div>
+    <div class="col-10 mt-1 p-1 w-100" style="position: absolute; bottom: 16px;">
+        <p class="float-right"><a href="{% url 'course_create' %}" class="btn btn-success">Create new course</a></p>
+    </div>
+</div>
+
+{% endblock %}
