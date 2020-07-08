@@ -40,6 +40,16 @@ def register(request):
 
 @login_required
 def dash(request):
-    text = render_to_string('dash/dash.html', {})
-    print(text)
+    
     return render(request, 'dash/dash.html', {})
+
+
+
+
+
+
+
+
+
+
+

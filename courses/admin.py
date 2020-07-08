@@ -20,3 +20,4 @@ class CourseAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ModuleInline]
 
+
